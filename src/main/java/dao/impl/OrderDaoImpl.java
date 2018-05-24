@@ -36,5 +36,18 @@ public class OrderDaoImpl extends HibernateDaoSupport implements OrderDao {
 				"from Order");
 		return orders;
 	}
-
+	public Order getOrderByStatus(int status,int id){
+		@SuppressWarnings("unchecked")
+		List<Order> orders = (List<Order>) getHibernateTemplate().find(
+				"from Order as o where o.userid=? and o.status=?", id,status);
+		Order order = orders.size() > 0 ? orders.get(0) : null;
+		return order;
+	}
+	public List<Order> getOrderListByUser(int uid){
+		@SuppressWarnings("unchecked")
+		List<Order> orders = (List<Order>) getHibernateTemplate().find(
+				"from Order as o where o.userid=?",uid);
+		if(orders.size()<1)return null;
+		else return orders;
+	}
 }

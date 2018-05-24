@@ -14,6 +14,9 @@
 		<property name="date" type="java.sql.Date">
 			<column name="date" />
 		</property>
+		<property name="status" type="int">
+			<column name="status" />
+		</property>
 		<set name="orderitems" lazy="false" inverse="true">
 			<key column="orderid" />
 			<one-to-many class="model.Orderitem" />

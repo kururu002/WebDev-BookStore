@@ -5,8 +5,9 @@
 <head>
 <title>BookStore</title>
 
+
 <%
-	response.sendRedirect("allUsersPro");
+	response.sendRedirect("book.jsp");
 %>
 
 </head>

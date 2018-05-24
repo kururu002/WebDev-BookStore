@@ -37,5 +37,10 @@ public class OrderitemDaoImpl extends HibernateDaoSupport implements
 				.find("from Orderitem");
 		return orderitems;
 	}
-
+	
+	public List<Orderitem> getOrderitemByOrder(int oid){
+		@SuppressWarnings("unchecked")
+		List<Orderitem> orderitems=(List<Orderitem>) getHibernateTemplate().find("from Orderitem as oi where oi.orderid=?",oid);
+		return orderitems;
+	}
 }

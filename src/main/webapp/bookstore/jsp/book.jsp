@@ -21,6 +21,8 @@
 </head>
 
 <body>
+	<%if ((Integer)session.getAttribute("uid") ==null||((Integer)session.getAttribute("uid") >1)) {
+				response.sendRedirect("NotAdmin.jsp");}%>
 	<%
 		ArrayList<Book> bookList = new ArrayList<Book>();
 			if (request.getAttribute("books") != null) {
@@ -35,7 +37,14 @@
 		<div class="navbar-header">
 			<a class="navbar-brand" href="#">BookStore</a>
 		</div>
-
+		<td height="50">
+        <div style = "text-align:right;" font-size:8px>
+			   <button onclick="javascript:location.href='logout.jsp'"> 
+			
+			   <i class="fa fa-sign-out"></i>
+			   </button>
+	    </div>
+        </td>
 		<div class="navbar-default sidebar" role="navigation">
 			<div class="sidebar-nav navbar-collapse">
 				<ul class="nav" id="side-menu">
@@ -47,6 +56,8 @@
 							Orders</a></li>
 					<li><a href="allOrderitemsPro"><i
 							class="fa fa-table fa-fw"></i> Orderitems</a></li>
+					<li><a href="SalesStaticsPro"><i
+							class="fa fa-table fa-fw"></i> Sales Statics</a></li>
 				</ul>
 			</div>
 			<!-- /.sidebar-collapse -->
@@ -82,6 +93,7 @@
 											<th>Price</th>
 											<th>Publisher</th>
 											<th>Date</th>
+											<th>Stock</th>
 											<th></th>
 										</tr>
 									</thead>
@@ -97,6 +109,7 @@
 											<td><%=book.getPrice()%></td>
 											<td><%=book.getPublisher()%></td>
 											<td><%=book.getDate()%></td>
+											<td><%=book.getStock()%></td>
 											<td>
 												<button class="btn btn-default delete" type="button"
 													data-id="<%=book.getId()%>">
@@ -108,7 +121,8 @@
 													data-author="<%=book.getAuthor()%>"
 													data-price="<%=book.getPrice()%>"
 													data-publisher="<%=book.getPublisher()%>"
-													data-date="<%=book.getDate()%>">
+													data-date="<%=book.getDate()%>"
+													data-stock="<%=book.getStock()%>">
 													<i class="fa fa-edit"></i>
 												</button>
 											</td>
@@ -163,6 +177,10 @@
 								<div class="form-group">
 									<label>Date</label> <input class="form-control" type="date"
 										name="date">
+								</div>
+								<div class="form-group">
+									<label>Stock</label> <input class="form-control" type="number"
+										name="stock">
 								</div>
 							</form>
 						</div>

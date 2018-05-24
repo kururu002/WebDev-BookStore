@@ -26,6 +26,8 @@
 </head>
 
 <body>
+	<%if ((Integer)session.getAttribute("uid") ==null||((Integer)session.getAttribute("uid") >1)) {
+				response.sendRedirect("NotAdmin.jsp");}%>
 	<%
 		ArrayList<Order> orderList = new ArrayList<Order>();
 		if (request.getAttribute("orders") != null) {
@@ -48,7 +50,14 @@
 		<div class="navbar-header">
 			<a class="navbar-brand" href="#">BookStore</a>
 		</div>
-
+		<td height="50">
+        <div style = "text-align:right;"font-size:9px>
+			   <button onclick="javascript:location.href='logout.jsp'"> 
+			
+			   <i class="fa fa-sign-out"></i>
+			   </button>
+	    </div>
+        </td>
 		<div class="navbar-default sidebar" role="navigation">
 			<div class="sidebar-nav navbar-collapse">
 				<ul class="nav" id="side-menu">
@@ -60,6 +69,8 @@
 							class="fa fa-reorder fa-fw"></i> Orders</a></li>
 					<li><a href="allOrderitemsPro"><i
 							class="fa fa-table fa-fw"></i> Orderitems</a></li>
+					<li><a href="SalesStaticsPro"><i
+							class="fa fa-table fa-fw"></i> Sales Statics</a></li>
 				</ul>
 			</div>
 			<!-- /.sidebar-collapse -->
@@ -93,6 +104,7 @@
 											<th>Userid</th>
 											<th>Date</th>
 											<th>Orderitem ID List</th>
+											<th>Status</th>
 											<th>Sum</th>
 											<th></th>
 										</tr>
@@ -124,6 +136,7 @@
 											<td><%=order.getUserid()%></td>
 											<td><%=order.getDate()%></td>
 											<td><%=orderitemStr%></td>
+											<td><%=order.getStatus()%></td>
 											<td><%=sum %></td>
 											<td>
 												<button class="btn btn-default delete" type="button"
@@ -133,10 +146,11 @@
 												<button class="btn btn-default edit" type="button"
 													data-id="<%=order.getId()%>"
 													data-userid="<%=order.getUserid()%>"
-													data-date="<%=order.getDate()%>">
+													data-date="<%=order.getDate()%>"
+													data-status="<%=order.getStatus()%>">
 													<i class="fa fa-edit"></i>
 												</button>
-											</td>	
+											</td>
 										</tr>
 										<%
 											}
@@ -172,8 +186,7 @@
 						<div class="col-lg-12">
 							<form role="form">
 								<div class="form-group">
-									<label>Userid</label>
-									<select class="form-control" id="userid">
+									<label>Userid</label> <select class="form-control" id="userid">
 										<%
 											for (int i = 0; i < userList.size(); i++) {
 												User user = userList.get(i);
@@ -187,6 +200,10 @@
 								<div class="form-group">
 									<label>Date</label> <input class="form-control" type="date"
 										name="date">
+								</div>
+								<div class="form-group">
+									<label>Status</label> <input class="form-control" type="number"
+										name="status">
 								</div>
 							</form>
 						</div>

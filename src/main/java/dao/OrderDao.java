@@ -15,5 +15,8 @@ public interface OrderDao {
 	public Order getOrderById(int id);
 
 	public List<Order> getAllOrders();
-
+	
+	public Order getOrderByStatus(int status,int id);
+	
+	public List<Order> getOrderListByUser(int uid);
 }

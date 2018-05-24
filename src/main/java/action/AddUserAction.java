@@ -45,8 +45,9 @@ public class AddUserAction extends BaseAction {
 	public String execute() throws Exception {
 
 		User user = new User(username, password, role);
+		if(role.equals("admin")||role.equals("user")||role.equals("customers")){
 		appService.addUser(user);
-
+		}
 		return SUCCESS;
 	}
 

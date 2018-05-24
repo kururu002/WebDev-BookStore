@@ -10,17 +10,19 @@ public class Book {
 	private double price;
 	private String publisher;
 	private Date date;
+	private int stock;
 
 	public Book() {
 	}
 
 	public Book(String title, String author, double price, String publisher,
-			Date date) {
+			Date date,int stock) {
 		this.title = title;
 		this.author = author;
 		this.price = price;
 		this.publisher = publisher;
 		this.date = date;
+		this.stock=stock;
 	}
 
 	public int getId() {
@@ -69,6 +71,20 @@ public class Book {
 
 	public void setDate(Date date) {
 		this.date = date;
+	}
+
+	/**
+	 * @return the stock
+	 */
+	public int getStock() {
+		return stock;
+	}
+
+	/**
+	 * @param stock the stock to set
+	 */
+	public void setStock(int stock) {
+		this.stock = stock;
 	}
 
 }

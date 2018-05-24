@@ -7,6 +7,11 @@
 	<constant name="struts.i18n.encoding" value="utf-8" />
 	<constant name="struts.devMode" value="true" />
 	<package name="process" extends="struts-default">
+		<!--IMG -->
+		<action name="GetIMGAction" class="action.MgGetIMGAction">
+			<result name="success">/bookstore/jsp/register.jsp</result>
+			<result name="error">/bookstore/jsp/loginfailed.jsp</result>
+		</action>
 		<!-- Book -->
 		<action name="allBooksPro" class="action.AllBooksAction">
 			<result name="success">/bookstore/jsp/book.jsp</result>
@@ -20,7 +25,12 @@
 		<action name="deleteBookPro" class="action.DeleteBookAction">
 			<result name="success">/bookstore/jsp/book.jsp</result>
 		</action>
-
+		<action name="GetBookPro" class="action.GetBookAction">
+			<result name="success">/bookstore/jsp/usercart.jsp</result>
+		</action>
+		<action name="bookInfo" class="action.BookInfo">
+            <result>/bookstore/jsp/bookInfo.jsp</result>
+        </action>
 		<!-- Order -->
 		<action name="allOrdersPro" class="action.AllOrdersAction">
 			<result name="success">/bookstore/jsp/order.jsp</result>
@@ -31,6 +41,9 @@
 		<action name="updateOrderPro" class="action.UpdateOrderAction">
 			<result name="success">/bookstore/jsp/order.jsp</result>
 		</action>
+		<action name="buyOrderPro" class="action.BuyOrderAction">
+			<result name="success">/bookstore/jsp/mycart.jsp</result>
+		</action>
 		<action name="deleteOrderPro" class="action.DeleteOrderAction">
 			<result name="success">/bookstore/jsp/order.jsp</result>
 		</action>
@@ -38,33 +51,97 @@
 		<!-- Orderitem -->
 		<action name="allOrderitemsPro" class="action.AllOrderitemsAction">
 			<result name="success">/bookstore/jsp/orderitem.jsp</result>
+			<result name="error">/bookstore/jsp/loginfailed.jsp</result>
 		</action>
 		<action name="addOrderitemPro" class="action.AddOrderitemAction">
 			<result name="success">/bookstore/jsp/orderitem.jsp</result>
+			<result name="error">/bookstore/jsp/loginfailed.jsp</result>
 		</action>
 		<action name="updateOrderitemPro" class="action.UpdateOrderitemAction">
 			<result name="success">/bookstore/jsp/orderitem.jsp</result>
+			<result name="error">/bookstore/jsp/loginfailed.jsp</result>
 		</action>
 		<action name="deleteOrderitemPro" class="action.DeleteOrderitemAction">
 			<result name="success">/bookstore/jsp/orderitem.jsp</result>
+			<result name="error">/bookstore/jsp/loginfailed.jsp</result>
 		</action>
 
 		<!-- User -->
 		<action name="allUsersPro" class="action.AllUsersAction">
 			<result name="success">/bookstore/jsp/user.jsp</result>
+			<result name="error">/bookstore/jsp/loginfailed.jsp</result>
 		</action>
 		<action name="addUserPro" class="action.AddUserAction">
 			<result name="success">/bookstore/jsp/user.jsp</result>
+			<result name="error">/bookstore/jsp/loginfailed.jsp</result>
 		</action>
 		<action name="updateUserPro" class="action.UpdateUserAction">
 			<result name="success">/bookstore/jsp/user.jsp</result>
+			<result name="error">/bookstore/jsp/loginfailed.jsp</result>
 		</action>
 		<action name="deleteUserPro" class="action.DeleteUserAction">
 			<result name="success">/bookstore/jsp/user.jsp</result>
+			<result name="error">/bookstore/jsp/loginfailed.jsp</result>
+		</action>
+		<!-- Login&Register -->
+		<action name="Login" class="logina" method="login">
+			<result name="input">/bookstore/jsp/index.jsp</result>
+			<result name="error">/bookstore/jsp/loginfailed.jsp</result>
+			<result name="success">/bookstore/jsp/index.jsp</result>
+		</action>
+		<action name="Register" class="registera" method="register">
+			<result name="input">/bookstore/jsp/index.jsp</result>
+			<result name="error">/bookstore/jsp/loginfailed.jsp</result>
+			<result name="success">/bookstore/jsp/index.jsp</result>
 		</action>
 
 		<action name="*">
 			<result>/{1}.jsp</result>
 		</action>
+		<!-- Cart -->
+		<action name="UserCart" class="action.CartAction">
+			<result name="success">/bookstore/jsp/usercart.jsp</result>
+			<result name="error">/bookstore/jsp/loginfailed.jsp</result>
+			
+		</action>
+		<action name="AddCartPro" class="action.AddCartAction">
+			<result name="success">/bookstore/jsp/usercart.jsp</result>
+			<result name="error">/bookstore/jsp/loginfailed.jsp</result>
+		</action>
+		<action name="MyCartPro" class="action.MyCartAction">
+			<result name="success">/bookstore/jsp/mycart.jsp</result>
+			<result name="error">/bookstore/jsp/usercart.jsp</result>
+		</action>
+		<action name="MyHistoryPro" class="action.MyHistoryAction">
+			<result name="success">/bookstore/jsp/myhistory.jsp</result>
+			<result name="error">/bookstore/jsp/usercart.jsp</result>
+		</action>
+		<action name="UserCenterPro" class="action.UserCenterAction">
+			<result name="success">/bookstore/jsp/UserCenter.jsp</result>
+			<result name="error">/bookstore/jsp/usercart.jsp</result>
+		</action>
+		<action name="ChangePassword" class="action.ChangePasswordAction">
+			<result name="success" type="redirectAction">UserCenterPro</result>
+			<result name="error">/bookstore/jsp/usercart.jsp</result>
+		</action>
+		<action name="UploadPro" class="action.UploadAction">
+			<result name="success" type="redirectAction">UserCenterPro</result>
+			<result name="error">/bookstore/jsp/usercart.jsp</result>
+		</action>
+		<action name="SalesStaticsPro" class="action.SalesAction">
+			<result name="success">/bookstore/jsp/statics.jsp</result>
+			<result name="error">/bookstore/jsp/loginfailed.jsp</result>
+		</action>
+	</package>
+	<package name="test" extends="json-default">
+		<action name="GetBookPro" class="action.GetBookAction">
+			<result type="json">
+				<param name="root">action</param>
+				<param name="includeProperties">result</param>
+				<param name="excludeNullProperties">true</param>
+				<param name="noCache">true</param>
+			</result>
+		</action>
+
 	</package>
 </struts>

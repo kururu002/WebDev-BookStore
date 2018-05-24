@@ -15,5 +15,7 @@ public interface OrderitemDao {
 	public Orderitem getOrderitemById(int id);
 
 	public List<Orderitem> getAllOrderitems();
+	
+	public List<Orderitem> getOrderitemByOrder(int oid);
 
 }

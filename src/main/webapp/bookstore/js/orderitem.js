@@ -8,7 +8,6 @@ $(function() {
 
 		var dataset = e.currentTarget.dataset;
 		var id = dataset.id;
-
 		if (id != "") { // Edit
 			jQuery.ajax({
 				url : 'updateOrderitemPro',

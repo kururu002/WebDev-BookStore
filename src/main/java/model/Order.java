@@ -9,13 +9,14 @@ public class Order {
 	private int id;
 	private int userid;
 	private Date date;
-
+	private int status;
 	public Order() {
 	}
 
-	public Order(int userid, Date date) {
+	public Order(int userid, Date date,int status) {
 		this.userid = userid;
 		this.date = date;
+		this.status=status;
 	}
 
 	public int getId() {
@@ -50,5 +51,19 @@ public class Order {
 
 	public void setOrderitems(Set<Orderitem> orderitems) {
 		this.orderitems = orderitems;
+	}
+
+	/**
+	 * @return the status
+	 */
+	public int getStatus() {
+		return status;
+	}
+
+	/**
+	 * @param status the status to set
+	 */
+	public void setStatus(int status) {
+		this.status = status;
 	}
 }

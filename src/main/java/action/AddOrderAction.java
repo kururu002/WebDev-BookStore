@@ -8,7 +8,7 @@ import service.AppService;
 public class AddOrderAction extends BaseAction {
 
 	private static final long serialVersionUID = 1L;
-
+	private int status;
 	private int userid;
 	private Date date;
 
@@ -37,10 +37,24 @@ public class AddOrderAction extends BaseAction {
 	@Override
 	public String execute() throws Exception {
 
-		Order order = new Order(userid, date);
+		Order order = new Order(userid, date,status);
 		appService.addOrder(order);
 
 		return SUCCESS;
+	}
+
+	/**
+	 * @return the status
+	 */
+	public int getStatus() {
+		return status;
+	}
+
+	/**
+	 * @param status the status to set
+	 */
+	public void setStatus(int status) {
+		this.status = status;
 	}
 
 }

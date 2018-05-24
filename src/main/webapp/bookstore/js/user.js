@@ -120,5 +120,25 @@ $(function() {
 		$("#save").attr("data-id", dataset.id);
 		$('#modal').modal('show');
 	});
-
+	$("#addcart").click(function(e) {
+		var dataset = e.currentTarget.dataset;
+		var id = dataset.id;
+		jQuery.ajax({
+			url : 'AddCartPro',
+			processData : true,
+			dataType : "text",
+			data : {
+				id : id
+			},
+			success : function(data) {
+				console.log(id);
+				bootbox.alert({
+					message : 'Added Successfully! ',
+					callback : function() {
+						location.reload();
+					}
+				});
+			}
+		});
+	});
 });

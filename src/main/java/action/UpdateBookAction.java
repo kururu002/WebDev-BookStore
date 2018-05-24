@@ -15,7 +15,7 @@ public class UpdateBookAction extends BaseAction {
 	private double price;
 	private String publisher;
 	private Date date;
-
+	private int stock;
 	private AppService appService;
 
 	public int getId() {
@@ -78,10 +78,25 @@ public class UpdateBookAction extends BaseAction {
 		book.setAuthor(author);
 		book.setPrice(price);
 		book.setPublisher(publisher);
+		book.setStock(stock);
 		book.setDate(date);
 		appService.updateBook(book);
 
 		return SUCCESS;
+	}
+
+	/**
+	 * @return the stock
+	 */
+	public int getStock() {
+		return stock;
+	}
+
+	/**
+	 * @param stock the stock to set
+	 */
+	public void setStock(int stock) {
+		this.stock = stock;
 	}
 
 }

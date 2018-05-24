@@ -23,5 +23,8 @@
 		<property name="date" type="java.sql.Date">
 			<column name="date" />
 		</property>
+		<property name="stock" type="int">
+			<column name="stock" />			
+		</property>
 	</class>
 </hibernate-mapping>

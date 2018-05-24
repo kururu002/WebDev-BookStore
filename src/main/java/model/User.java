@@ -15,6 +15,12 @@ public class User {
 		this.password = password;
 		this.role = role;
 	}
+	public User(User u){
+		this.id=u.getId();
+		this.username = u.getUsername();
+		this.password = u.getPassword();
+		this.role = u.getRole();
+	}
 
 	public int getId() {
 		return id;

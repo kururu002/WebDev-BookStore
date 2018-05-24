@@ -3,11 +3,12 @@ $(function() {
 	$("#save").click(function(e) {
 		var userid = $("#userid").val();
 		var date = $("input[name='date']").val();
-		console.log(userid, date);
+		var status=$("input[name='status']").val();
+		console.log(userid, date,status);
 
 		var dataset = e.currentTarget.dataset;
 		var id = dataset.id;
-
+		
 		if (id != "") { // Edit
 			jQuery.ajax({
 				url : 'updateOrderPro',
@@ -16,7 +17,8 @@ $(function() {
 				data : {
 					id : id,
 					userid : userid,
-					date : date
+					date : date,
+					status:status
 				},
 				success : function(data) {
 					console.log(id);
@@ -36,7 +38,8 @@ $(function() {
 				dataType : "text",
 				data : {
 					userid : userid,
-					date : date
+					date : date,
+					status:status
 				},
 				success : function(data) {
 					bootbox.alert({
@@ -98,7 +101,7 @@ $(function() {
 
 		$("#userid").val("");
 		$("input[name='date']").val("");
-
+		$("input[name='status']").val("");
 		$("#save").attr("data-id", "");
 		$('#modal').modal('show');
 	});
@@ -111,7 +114,7 @@ $(function() {
 
 		$("#userid").val(dataset.userid);
 		$("input[name='date']").val(dataset.date);
-
+		$("input[name='status']").val(dataset.status);
 		$("#save").attr("data-id", dataset.id);
 		$('#modal').modal('show');
 	});

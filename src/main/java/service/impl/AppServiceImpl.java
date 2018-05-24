@@ -1,5 +1,6 @@
 package service.impl;
 
+import java.io.File;
 import java.util.List;
 
 import model.Book;
@@ -8,9 +9,12 @@ import model.Orderitem;
 import model.User;
 import service.AppService;
 import dao.BookDao;
+import dao.IMGDao;
 import dao.OrderDao;
 import dao.OrderitemDao;
+import dao.SalesDao;
 import dao.UserDao;
+import dao.impl.SalesDaoImpl;
 
 /**
  * @author seniyuting
@@ -19,121 +23,169 @@ import dao.UserDao;
  */
 public class AppServiceImpl implements AppService {
 
-	private BookDao bookDao;
-	private OrderDao orderDao;
-	private OrderitemDao orderitemDao;
-	private UserDao userDao;
+    private BookDao bookDao;
+    private OrderDao orderDao;
+    private OrderitemDao orderitemDao;
+    private UserDao userDao;
+    private IMGDao imgDao;
+    private SalesDao salesDao;
 
-	public void setBookDao(BookDao bookDao) {
-		this.bookDao = bookDao;
-	}
+    public void setSalesDao(SalesDaoImpl salesDao) {
+        this.salesDao = salesDao;
+    }
 
-	public void setOrderDao(OrderDao orderDao) {
-		this.orderDao = orderDao;
-	}
+    public int sales(int userid, int bookid) {
+        return salesDao.sales(userid, bookid);
+    }
 
-	public void setOrderitemDao(OrderitemDao orderitemDao) {
-		this.orderitemDao = orderitemDao;
-	}
+    public void setBookDao(BookDao bookDao) {
+        this.bookDao = bookDao;
+    }
 
-	public void setUserDao(UserDao userDao) {
-		this.userDao = userDao;
-	}
+    public void setOrderDao(OrderDao orderDao) {
+        this.orderDao = orderDao;
+    }
 
-	/**
-	 * book
-	 * 
-	 */
-	public Integer addBook(Book book) {
-		return bookDao.save(book);
-	}
+    public void setOrderitemDao(OrderitemDao orderitemDao) {
+        this.orderitemDao = orderitemDao;
+    }
 
-	public void deleteBook(Book book) {
-		bookDao.delete(book);
-	}
+    public void setUserDao(UserDao userDao) {
+        this.userDao = userDao;
+    }
 
-	public void updateBook(Book book) {
-		bookDao.update(book);
-	}
+    /**
+     * book
+     * 
+     */
+    public Integer addBook(Book book) {
+        return bookDao.save(book);
+    }
 
-	public Book getBookById(int id) {
-		return bookDao.getBookById(id);
-	}
+    public void deleteBook(Book book) {
+        bookDao.delete(book);
+    }
 
-	public List<Book> getAllBooks() {
-		return bookDao.getAllBooks();
-	}
+    public void updateBook(Book book) {
+        bookDao.update(book);
+    }
 
-	/**
-	 * order
-	 * 
-	 */
-	public Integer addOrder(Order order) {
-		return orderDao.save(order);
-	}
+    public Book getBookById(int id) {
+        return bookDao.getBookById(id);
+    }
 
-	public void deleteOrder(Order order) {
-		orderDao.delete(order);
-	}
+    public List<Book> getAllBooks() {
+        return bookDao.getAllBooks();
+    }
 
-	public void updateOrder(Order order) {
-		orderDao.update(order);
-	}
+    /**
+     * order
+     * 
+     */
+    public Integer addOrder(Order order) {
+        return orderDao.save(order);
+    }
 
-	public Order getOrderById(int id) {
-		return orderDao.getOrderById(id);
-	}
+    public void deleteOrder(Order order) {
+        orderDao.delete(order);
+    }
 
-	public List<Order> getAllOrders() {
-		return orderDao.getAllOrders();
-	}
+    public void updateOrder(Order order) {
+        orderDao.update(order);
+    }
 
-	/**
-	 * order item
-	 * 
-	 */
-	public Integer addOrderitem(Orderitem orderitem) {
-		return orderitemDao.save(orderitem);
-	}
+    public Order getOrderById(int id) {
+        return orderDao.getOrderById(id);
+    }
 
-	public void deleteOrderitem(Orderitem orderitem) {
-		orderitemDao.delete(orderitem);
-	}
+    public List<Order> getAllOrders() {
+        return orderDao.getAllOrders();
+    }
 
-	public void updateOrderitem(Orderitem orderitem) {
-		orderitemDao.update(orderitem);
-	}
+    public Order getOrderByStatus(int status, int id) {
+        return orderDao.getOrderByStatus(status, id);
+    }
 
-	public Orderitem getOrderitemById(int id) {
-		return orderitemDao.getOrderitemById(id);
-	}
+    public List<Order> getOrderListByUser(int uid) {
+        return orderDao.getOrderListByUser(uid);
+    }
 
-	public List<Orderitem> getAllOrderitems() {
-		return orderitemDao.getAllOrderitems();
-	}
+    /**
+     * order item
+     * 
+     */
+    public Integer addOrderitem(Orderitem orderitem) {
+        return orderitemDao.save(orderitem);
+    }
 
-	/**
-	 * user
-	 * 
-	 */
-	public Integer addUser(User user) {
-		return userDao.save(user);
-	}
+    public void deleteOrderitem(Orderitem orderitem) {
+        orderitemDao.delete(orderitem);
+    }
 
-	public void deleteUser(User user) {
-		userDao.delete(user);
-	}
+    public void updateOrderitem(Orderitem orderitem) {
+        orderitemDao.update(orderitem);
+    }
 
-	public void updateUser(User user) {
-		userDao.update(user);
-	}
+    public Orderitem getOrderitemById(int id) {
+        return orderitemDao.getOrderitemById(id);
+    }
 
-	public User getUserById(int id) {
-		return userDao.getUserById(id);
-	}
+    public List<Orderitem> getAllOrderitems() {
+        return orderitemDao.getAllOrderitems();
+    }
 
-	public List<User> getAllUsers() {
-		return userDao.getAllUsers();
-	}
+    public List<Orderitem> getOrderitemByOrder(int oid) {
+        return orderitemDao.getOrderitemByOrder(oid);
+    }
+
+    /**
+     * user
+     * 
+     */
+    public Integer addUser(User user) {
+        return userDao.save(user);
+    }
+
+    public void deleteUser(User user) {
+        userDao.delete(user);
+    }
+
+    public void updateUser(User user) {
+        userDao.update(user);
+    }
+
+    public User getUserById(int id) {
+        return userDao.getUserById(id);
+    }
+
+    public List<User> getAllUsers() {
+        return userDao.getAllUsers();
+    }
+
+    public String getIMG(String filename) throws Exception {
+        return imgDao.getIMG(filename);
+    }
+
+    public String getProfile(String filename) throws Exception {
+        return imgDao.getProfile(filename);
+    }
+
+    public void saveIMG(String filename, File file, String description) throws Exception {
+        imgDao.saveIMG(filename, file, description);
+    }
+
+    /**
+     * @return the imgDao
+     */
+    public IMGDao getImgDao() {
+        return imgDao;
+    }
+
+    /**
+     * @param imgDao the imgDao to set
+     */
+    public void setImgDao(IMGDao imgDao) {
+        this.imgDao = imgDao;
+    }
 
 }

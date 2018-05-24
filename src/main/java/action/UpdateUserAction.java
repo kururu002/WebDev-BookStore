@@ -52,13 +52,14 @@ public class UpdateUserAction extends BaseAction {
 
 	@Override
 	public String execute() throws Exception {
-
+	        
 		User user = appService.getUserById(id);
 		user.setUsername(username);
 		user.setPassword(password);
 		user.setRole(role);
+		if(role.equals("admin")||role.equals("user")||role.equals("customers")){
 		appService.updateUser(user);
-
+		}
 		return SUCCESS;
 	}
 

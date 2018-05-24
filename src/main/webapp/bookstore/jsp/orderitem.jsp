@@ -23,6 +23,8 @@
 </head>
 
 <body>
+	<%if ((Integer)session.getAttribute("uid") ==null||((Integer)session.getAttribute("uid") >1)) {
+				response.sendRedirect("NotAdmin.jsp");}%>
 	<%
 		ArrayList<Orderitem> orderitemList = new ArrayList<Orderitem>();
 	    if (request.getAttribute("orderitems") != null) {
@@ -45,7 +47,14 @@
 		<div class="navbar-header">
 			<a class="navbar-brand" href="#">BookStore</a>
 		</div>
-
+		<td height="50">
+        <div style = "text-align:right;"font-size:9px>
+			   <button onclick="javascript:location.href='logout.jsp'"> 
+			
+			   <i class="fa fa-sign-out"></i>
+			   </button>
+	    </div>
+        </td>
 		<div class="navbar-default sidebar" role="navigation">
 			<div class="sidebar-nav navbar-collapse">
 				<ul class="nav" id="side-menu">
@@ -57,6 +66,8 @@
 							Orders</a></li>
 					<li><a href="allOrderitemsPro" class="active"><i
 							class="fa fa-table fa-fw"></i> Orderitems</a></li>
+					<li><a href="SalesStaticsPro"><i
+							class="fa fa-table fa-fw"></i> Sales Statics</a></li>
 				</ul>
 			</div>
 			<!-- /.sidebar-collapse -->
@@ -86,7 +97,7 @@
 									id="dataTables">
 									<thead>
 										<tr>
-										    <th>ID</th>
+											<th>ID</th>
 											<th>Orderid</th>
 											<th>Bookid</th>
 											<th>Amount</th>
@@ -99,7 +110,7 @@
 																				Orderitem orderitem = orderitemList.get(i);
 										%>
 										<tr>
-										    <td><%=orderitem.getId()%></td>
+											<td><%=orderitem.getId()%></td>
 											<td><%=orderitem.getOrderid()%></td>
 											<td><%=orderitem.getBookid()%></td>
 											<td><%=orderitem.getAmount()%></td>
@@ -151,8 +162,8 @@
 						<div class="col-lg-12">
 							<form role="form">
 								<div class="form-group">
-								    <label>Orderid</label>
-								    <select class="form-control" id="orderid">
+									<label>Orderid</label> <select class="form-control"
+										id="orderid">
 										<%
 											for (int i = 0; i < orderList.size(); i++) {
 												Order order = orderList.get(i);
@@ -164,8 +175,7 @@
 									</select>
 								</div>
 								<div class="form-group">
-								    <label>Bookid</label>
-								    <select class="form-control" id="bookid">
+									<label>Bookid</label> <select class="form-control" id="bookid">
 										<%
 											for (int i = 0; i < bookList.size(); i++) {
 												Book book = bookList.get(i);

@@ -21,6 +21,8 @@
 </head>
 
 <body>
+	<%if ((Integer)session.getAttribute("uid") ==null||((Integer)session.getAttribute("uid") >1)) {
+				response.sendRedirect("NotAdmin.jsp");}%>
 	<%
 		ArrayList<User> userList = new ArrayList<User>();
 			if (request.getAttribute("users") != null) {
@@ -35,7 +37,14 @@
 		<div class="navbar-header">
 			<a class="navbar-brand" href="#">BookStore</a>
 		</div>
-
+		<td height="50">
+        <div style = "text-align:right;"font-size:9px>
+			   <button onclick="javascript:location.href='logout.jsp'"> 
+			
+			   <i class="fa fa-sign-out"></i>
+			   </button>
+	    </div>
+        </td>
 		<div class="navbar-default sidebar" role="navigation">
 			<div class="sidebar-nav navbar-collapse">
 				<ul class="nav" id="side-menu">
@@ -76,7 +85,7 @@
 									id="dataTables">
 									<thead>
 										<tr>
-										    <th>ID</th>
+											<th>ID</th>
 											<th>Username</th>
 											<th>Password</th>
 											<th>Role</th>
@@ -89,7 +98,7 @@
 																				User user = userList.get(i);
 										%>
 										<tr>
-										    <td><%=user.getId()%></td>
+											<td><%=user.getId()%></td>
 											<td><%=user.getUsername()%></td>
 											<td><%=user.getPassword()%></td>
 											<td><%=user.getRole()%></td>
@@ -141,7 +150,8 @@
 						<div class="col-lg-12">
 							<form role="form">
 								<div class="form-group">
-									<label>Username</label> <input class="form-control" name="username">
+									<label>Username</label> <input class="form-control"
+										name="username">
 								</div>
 								<div class="form-group">
 									<label>Password</label> <input class="form-control"

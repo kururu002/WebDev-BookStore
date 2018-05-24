@@ -6,7 +6,8 @@ $(function() {
 		var price = $("input[name='price']").val();
 		var publisher = $("input[name='publisher']").val();
 		var date = $("input[name='date']").val();
-		console.log(title, author, price, publisher, date);
+		var stock=$("input[name='stock']").val();
+		console.log(title, author, price, publisher, date,stock);
 
 		var dataset = e.currentTarget.dataset;
 		var id = dataset.id;
@@ -22,7 +23,8 @@ $(function() {
 					author : author,
 					price : price,
 					publisher : publisher,
-					date : date
+					date : date,
+					stock:stock
 				},
 				success : function(data) {
 					console.log(id);
@@ -45,7 +47,8 @@ $(function() {
 					author : author,
 					price : price,
 					publisher : publisher,
-					date : date
+					date : date,
+					stock:stock
 				},
 				success : function(data) {
 					bootbox.alert({
@@ -110,7 +113,8 @@ $(function() {
 		$("input[name='price']").val("");
 		$("input[name='publisher']").val("");
 		$("input[name='date']").val("");
-
+		$("input[name='stock']").val("");
+		
 		$("#save").attr("data-id", "");
 		$('#modal').modal('show');
 	});
@@ -126,7 +130,8 @@ $(function() {
 		$("input[name='price']").val(dataset.price);
 		$("input[name='publisher']").val(dataset.publisher);
 		$("input[name='date']").val(dataset.date);
-
+		$("input[name='stock']").val(dataset.stock);
+		
 		$("#save").attr("data-id", dataset.id);
 		$('#modal').modal('show');
 	});

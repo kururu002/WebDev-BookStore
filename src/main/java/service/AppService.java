@@ -1,5 +1,6 @@
 package service;
 
+import java.io.File;
 import java.util.List;
 
 import model.Book;
@@ -8,66 +9,81 @@ import model.Orderitem;
 import model.User;
 
 /**
- * @author seniyuting
+ * 
  * @version 1.0
  * 
  */
 public interface AppService {
 
-	/**
-	 * book
-	 * 
-	 */
-	public Integer addBook(Book book);
+    /**
+     * book
+     * 
+     */
 
-	public void deleteBook(Book book);
+    public Integer addBook(Book book);
 
-	public void updateBook(Book book);
+    public void deleteBook(Book book);
 
-	public Book getBookById(int id);
+    public void updateBook(Book book);
 
-	public List<Book> getAllBooks();
+    public Book getBookById(int id);
 
-	/**
-	 * order
-	 * 
-	 */
-	public Integer addOrder(Order order);
+    public List<Book> getAllBooks();
 
-	public void deleteOrder(Order order);
+    /**
+     * order
+     * 
+     */
+    public Integer addOrder(Order order);
 
-	public void updateOrder(Order order);
+    public void deleteOrder(Order order);
 
-	public Order getOrderById(int id);
+    public void updateOrder(Order order);
 
-	public List<Order> getAllOrders();
+    public Order getOrderById(int id);
 
-	/**
-	 * order item
-	 * 
-	 */
-	public Integer addOrderitem(Orderitem orderitem);
+    public List<Order> getAllOrders();
 
-	public void deleteOrderitem(Orderitem orderitem);
+    public Order getOrderByStatus(int status, int id);
 
-	public void updateOrderitem(Orderitem orderitem);
+    public List<Order> getOrderListByUser(int uid);
 
-	public Orderitem getOrderitemById(int id);
+    /**
+     * order item
+     * 
+     */
+    public Integer addOrderitem(Orderitem orderitem);
 
-	public List<Orderitem> getAllOrderitems();
+    public void deleteOrderitem(Orderitem orderitem);
 
-	/**
-	 * user
-	 * 
-	 */
-	public Integer addUser(User user);
+    public void updateOrderitem(Orderitem orderitem);
 
-	public void deleteUser(User user);
+    public Orderitem getOrderitemById(int id);
 
-	public void updateUser(User user);
+    public List<Orderitem> getAllOrderitems();
 
-	public User getUserById(int id);
+    public List<Orderitem> getOrderitemByOrder(int oid);
 
-	public List<User> getAllUsers();
+    /**
+     * user
+     * 
+     */
+    public Integer addUser(User user);
+
+    public void deleteUser(User user);
+
+    public void updateUser(User user);
+
+    public User getUserById(int id);
+
+    public List<User> getAllUsers();
+
+    public String getIMG(String filename) throws Exception;
+
+    public String getProfile(String filename) throws Exception;
+
+    public void saveIMG(String filename, File file, String description) throws Exception;
+
+    int sales(int userid, int bookid);
 
 }

@@ -3,20 +3,25 @@
 <beans xmlns="http://www.springframework.org/schema/beans"
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:aop="http://www.springframework.org/schema/aop"
 	xmlns:p="http://www.springframework.org/schema/p" xmlns:tx="http://www.springframework.org/schema/tx"
-	xsi:schemaLocation="http://www.springframework.org/schema/beans 
+	xmlns:mongo="http://www.springframework.org/schema/data/mongo"
+	xsi:schemaLocation="
+	http://www.springframework.org/schema/data/mongo
+	http://www.springframework.org/schema/data/mongo/spring-mongo.xsd
+	http://www.springframework.org/schema/beans 
 	http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
 	http://www.springframework.org/schema/tx 
 	http://www.springframework.org/schema/tx/spring-tx-3.0.xsd
 	http://www.springframework.org/schema/aop 
 	http://www.springframework.org/schema/aop/spring-aop-3.0.xsd">
-
+	
+	<mongo:mongo-client id="mongoClient" host="localhost" port="27017" />
 	<!-- Bean -->
 	<bean id="dataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource"
 		destroy-method="close" p:driverClass="com.mysql.jdbc.Driver"
 		p:jdbcUrl="jdbc:mysql://localhost:3306/bookstore" p:user="root"
-		p:password="root" p:maxPoolSize="40" p:minPoolSize="1"
-		p:initialPoolSize="1" p:maxIdleTime="20" />
-
+		p:password="" p:maxPoolSize="40" p:minPoolSize="1" p:initialPoolSize="1"
+		p:maxIdleTime="20" />
+ 
 	<bean id="sessionFactory"
 		class="org.springframework.orm.hibernate3.LocalSessionFactoryBean"
 		p:dataSource-ref="dataSource">
@@ -52,7 +57,12 @@
 	<bean id="userDao" class="dao.impl.UserDaoImpl">
 		<property name="sessionFactory" ref="sessionFactory" />
 	</bean>
-
+	<bean id="imgDao" class="dao.impl.IMGDaoImpl">
+		<property name="mongoClient" ref="mongoClient" />
+	</bean>
+	<bean id="salesDao" class="dao.impl.SalesDaoImpl">
+		<property name="sessionFactory" ref="sessionFactory" />
+	</bean>
 	<!-- Service -->
 	<bean id="appService" class="service.impl.AppServiceImpl">
 		<!-- DAO -->
@@ -60,6 +70,8 @@
 		<property name="orderDao" ref="orderDao"></property>
 		<property name="orderitemDao" ref="orderitemDao"></property>
 		<property name="userDao" ref="userDao"></property>
+		<property name="imgDao" ref="imgDao"></property>
+		<property name="salesDao" ref="salesDao"></property>
 	</bean>
 
 	<!-- HibernateTransactionManager -->
@@ -78,5 +90,41 @@
 		<aop:pointcut id="beanPointcut" expression="bean(appService)" />
 		<aop:advisor advice-ref="txAdvice" pointcut-ref="beanPointcut" />
 	</aop:config>
+	
+	<!-- Login -->
+	
+    <bean id="logind" class="dao.impl.LoginDaoImpl">
+        <!-- 注入持久化操作所需的SessionFactory -->
+        <property name="sessionFactory">
+            <ref bean="sessionFactory" />
+        </property>
+    </bean>
 
+    
+    <bean id="logins" class="service.impl.LoginServiceImpl">
+        <property name="logindao" ref="logind"></property>
+    </bean>
+
+   
+    <bean id="logina" class="action.LoginAction" scope="prototype">
+        <property name="loginservice" ref="logins"></property>
+    </bean>
+    
+    <!-- Register -->
+    
+	 <bean id="registerd" class="dao.impl.RegisterDaoImpl">
+        <!-- 注入持久化操作所需的SessionFactory -->
+        <property name="sessionFactory">
+            <ref bean="sessionFactory" />
+        </property>
+    </bean>
+   
+    <bean id="registers" class="service.impl.RegisterServiceImpl">
+        <property name="registerdao" ref="registerd"></property>
+    </bean>
+
+   
+    <bean id="registera" class="action.RegisterAction" scope="prototype">
+        <property name="registerservice" ref="registers"></property>
+    </bean>
 </beans>

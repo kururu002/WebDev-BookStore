@@ -14,6 +14,7 @@ public class AddBookAction extends BaseAction {
 	private double price;
 	private String publisher;
 	private Date date;
+	private int stock;
 
 	private AppService appService;
 
@@ -64,10 +65,24 @@ public class AddBookAction extends BaseAction {
 	@Override
 	public String execute() throws Exception {
 
-		Book book = new Book(title, author, price, publisher, date);
+		Book book = new Book(title, author, price, publisher, date,stock);
 		appService.addBook(book);
 
 		return SUCCESS;
+	}
+
+	/**
+	 * @return the stock
+	 */
+	public int getStock() {
+		return stock;
+	}
+
+	/**
+	 * @param stock the stock to set
+	 */
+	public void setStock(int stock) {
+		this.stock = stock;
 	}
 
 }
